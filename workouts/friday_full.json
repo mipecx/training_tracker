@@ -1,0 +1,216 @@
+{
+  "id": "friday_full",
+  "name": "FULL",
+  "day": "friday",
+  "exercises": [
+    {
+      "id": "pike_pushups",
+      "name": "Pike Push-ups",
+      "sets": 4,
+      "reps_target": "8–12",
+      "rest_sec": 240,
+      "notes": "",
+      "difficulty_level": 1,
+      "difficulty_max": 1,
+      "technique": {
+        "text": "Place your feet as close to your hands as possible — your body forms an inverted V. Lower your head straight down between your hands, elbows slightly out.",
+        "image": ""
+      }
+    },
+    {
+      "id": "scapular_pullups",
+      "name": "Scapular Pull-ups",
+      "sets": 3,
+      "reps_target": "8–10",
+      "rest_sec": 75,
+      "notes": "Only the shoulder blades moving up and down.",
+      "difficulty_level": 1,
+      "difficulty_max": 1,
+      "technique": {
+        "text": "Hang from the bar with straight arms. Without bending your elbows: pull your shoulder blades down — the body rises slightly. Then relax — the body lowers. This is a shoulder girdle warm-up.",
+        "image": ""
+      }
+    },
+    {
+      "id": "pullups_full",
+      "name": "Pull-ups",
+      "sets": 4,
+      "reps_target": "max",
+      "rest_sec": 240,
+      "notes": "Full range of motion, pause at the top.",
+      "difficulty_level": 2,
+      "difficulty_max": 5,
+      "difficulty_threshold": 10,
+      "progression": [
+        {
+          "level": 1,
+          "name": "Scapular Pull-ups",
+          "description": "Shoulder blades only"
+        },
+        {
+          "level": 2,
+          "name": "Pull-ups",
+          "description": "Standard"
+        },
+        {
+          "level": 3,
+          "name": "Archer Pull-ups",
+          "description": "Asymmetric"
+        },
+        {
+          "level": 4,
+          "name": "L-sit Pull-ups",
+          "description": "With an L-sit"
+        },
+        {
+          "level": 5,
+          "name": "One-arm Negatives",
+          "description": "Negatives with one arm"
+        }
+      ],
+      "technique": {
+        "text": "Grip slightly wider than shoulder-width, shoulders down and back. Drive your elbows toward your hips.",
+        "image": ""
+      }
+    },
+    {
+      "id": "decline_pushups_full",
+      "name": "Decline Push-ups",
+      "sets": 4,
+      "reps_target": "10–12",
+      "rest_sec": 150,
+      "notes": "Upper chest.",
+      "difficulty_level": 2,
+      "difficulty_max": 4,
+      "difficulty_threshold": 12,
+      "progression": [
+        {
+          "level": 1,
+          "name": "Push-ups",
+          "description": "Regular"
+        },
+        {
+          "level": 2,
+          "name": "Decline Push-ups",
+          "description": "Feet elevated"
+        },
+        {
+          "level": 3,
+          "name": "Archer Push-ups",
+          "description": "Asymmetric"
+        },
+        {
+          "level": 4,
+          "name": "One-arm Progression",
+          "description": "Toward one-arm push-ups"
+        }
+      ],
+      "technique": {
+        "text": "Feet elevated, body straight.",
+        "image": ""
+      }
+    },
+    {
+      "id": "australian_rows_full",
+      "name": "Australian Rows",
+      "sets": 3,
+      "reps_target": "8–12",
+      "rest_sec": 150,
+      "notes": "Keep the body as horizontal as possible.",
+      "difficulty_level": 2,
+      "difficulty_max": 4,
+      "difficulty_threshold": 12,
+      "progression": [
+        {
+          "level": 1,
+          "name": "Incline Rows",
+          "description": "At an angle"
+        },
+        {
+          "level": 2,
+          "name": "Australian Rows",
+          "description": "Horizontal"
+        },
+        {
+          "level": 3,
+          "name": "Feet-elevated Rows",
+          "description": "Feet elevated"
+        },
+        {
+          "level": 4,
+          "name": "One-arm Rows",
+          "description": "One arm"
+        }
+      ],
+      "technique": {
+        "text": "Body straight, pull your chest to the grip point.",
+        "image": ""
+      }
+    },
+    {
+      "id": "diamond_pushups_full",
+      "name": "Diamond Push-ups",
+      "sets": 3,
+      "reps_target": "max",
+      "rest_sec": 120,
+      "notes": "To failure with proper technique.",
+      "difficulty_level": 2,
+      "difficulty_max": 3,
+      "difficulty_threshold": 12,
+      "progression": [
+        {
+          "level": 1,
+          "name": "Close-grip Push-ups",
+          "description": "Close grip"
+        },
+        {
+          "level": 2,
+          "name": "Diamond Push-ups",
+          "description": "Diamond"
+        },
+        {
+          "level": 3,
+          "name": "Diamond + Pause",
+          "description": "With a pause"
+        }
+      ],
+      "technique": {
+        "text": "Diamond formed by your fingers, elbows back.",
+        "image": ""
+      }
+    },
+    {
+      "id": "dead_hang_full",
+      "name": "Dead Hang",
+      "sets": 2,
+      "reps_target": "max",
+      "rest_sec": 105,
+      "notes": "Hang for shoulder health.",
+      "is_timed": true,
+      "difficulty_level": 1,
+      "difficulty_max": 3,
+      "difficulty_threshold": 60,
+      "progression": [
+        {
+          "level": 1,
+          "name": "Dead Hang",
+          "description": "Passive"
+        },
+        {
+          "level": 2,
+          "name": "Active Dead Hang",
+          "description": "Active"
+        },
+        {
+          "level": 3,
+          "name": "One-arm Dead Hang",
+          "description": "One arm"
+        }
+      ],
+      "technique": {
+        "text": "Relax, then activate your shoulder blades.",
+        "image": ""
+      }
+    }
+  ]
+}

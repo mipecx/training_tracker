@@ -1,0 +1,210 @@
+{
+  "id": "wednesday_pull",
+  "name": "PULL",
+  "day": "wednesday",
+  "exercises": [
+    {
+      "id": "pullups",
+      "name": "Pull-ups",
+      "sets": 4,
+      "reps_target": "6–10",
+      "rest_sec": 240,
+      "notes": "Grip slightly wider than shoulder-width. Full range — up to the chin, down to straight arms.",
+      "technique": {
+        "text": "Grip slightly wider than shoulder-width, shoulders down and back. Drive your elbows toward your hips. Full range of motion is a must.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Scapular Pull-ups",
+          "description": "Shoulder blades only — no elbow bend"
+        },
+        {
+          "level": 2,
+          "name": "Pull-ups",
+          "description": "Standard pull-ups"
+        },
+        {
+          "level": 3,
+          "name": "Archer Pull-ups",
+          "description": "One arm pulls, the other stays straight"
+        },
+        {
+          "level": 4,
+          "name": "L-sit Pull-ups",
+          "description": "Legs parallel to the floor"
+        },
+        {
+          "level": 5,
+          "name": "One-arm Pull-up Neg",
+          "description": "Negatives with one arm"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 5,
+      "difficulty_threshold": 10
+    },
+    {
+      "id": "chinups",
+      "name": "Chin-ups",
+      "sets": 3,
+      "reps_target": "8–10",
+      "rest_sec": 120,
+      "notes": "Underhand grip — more biceps.",
+      "technique": {
+        "text": "Underhand grip at shoulder-width. Drive elbows down, chest to the bar. Pause at the top.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Negative Chin-ups",
+          "description": "Slow lowering only"
+        },
+        {
+          "level": 2,
+          "name": "Chin-ups",
+          "description": "Underhand grip"
+        },
+        {
+          "level": 3,
+          "name": "Weighted Chin-ups",
+          "description": "Weighted"
+        },
+        {
+          "level": 4,
+          "name": "One-arm Chin-up Prog",
+          "description": "Progression to one-arm chin-ups"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 4,
+      "difficulty_threshold": 10
+    },
+    {
+      "id": "australian_rows",
+      "name": "Australian Rows",
+      "sets": 4,
+      "reps_target": "8–12",
+      "rest_sec": 150,
+      "notes": "Body straight like a plank. The more horizontal, the harder.",
+      "technique": {
+        "text": "Body straight like a plank from heels to head. Pull your chest to the grip point. Squeeze your shoulder blades at the end.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Incline Rows",
+          "description": "At a 45° angle"
+        },
+        {
+          "level": 2,
+          "name": "Australian Rows",
+          "description": "Horizontal"
+        },
+        {
+          "level": 3,
+          "name": "Feet-elevated Rows",
+          "description": "Feet elevated"
+        },
+        {
+          "level": 4,
+          "name": "One-arm Rows",
+          "description": "One arm"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 4,
+      "difficulty_threshold": 12
+    },
+    {
+      "id": "band_pulls",
+      "name": "Band Pulls",
+      "sets": 3,
+      "reps_target": "12–15",
+      "rest_sec": 90,
+      "notes": "Band pull-aparts. Rear delt health.",
+      "technique": {
+        "text": "Arms straight, pull the band toward your chest while spreading your arms out. Squeeze your shoulder blades.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Band Pull-aparts",
+          "description": "Light band"
+        },
+        {
+          "level": 2,
+          "name": "Band Pull-aparts",
+          "description": "Stiff band"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 2,
+      "difficulty_threshold": 15
+    },
+    {
+      "id": "face_pulls",
+      "name": "Face Pulls",
+      "sets": 3,
+      "reps_target": "12–15",
+      "rest_sec": 90,
+      "notes": "Shoulder health. Pull toward your face, elbows above shoulder line.",
+      "technique": {
+        "text": "Pull toward the bridge of your nose, elbows above your shoulder line. At the end point, externally rotate the shoulder.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Face Pulls (band)",
+          "description": "With a band or towel"
+        },
+        {
+          "level": 2,
+          "name": "Face Pulls (harder band)",
+          "description": "Stiffer band"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 2,
+      "difficulty_threshold": 15
+    },
+    {
+      "id": "dead_hang",
+      "name": "Dead Hang",
+      "sets": 2,
+      "reps_target": "max",
+      "rest_sec": 60,
+      "notes": "Hanging from the bar for shoulder and grip health.",
+      "technique": {
+        "text": "Relax your shoulders, then activate your shoulder blades down and back. Breathe calmly.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Dead Hang",
+          "description": "Passive hang"
+        },
+        {
+          "level": 2,
+          "name": "Active Dead Hang",
+          "description": "Shoulder blades down, active tension"
+        },
+        {
+          "level": 3,
+          "name": "One-arm Dead Hang",
+          "description": "Alternating one arm"
+        }
+      ],
+      "is_timed": true,
+      "difficulty_level": 1,
+      "difficulty_max": 3,
+      "difficulty_threshold": 60
+    }
+  ]
+}

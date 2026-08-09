@@ -1,0 +1,23 @@
+# Личные данные тренировок
+data/
+*.db
+*.sqlite
+
+# OS
+.DS_Store
+
+# Go binaries
+*.exe
+*.test
+coverage.*
+
+# Node (покрывается вложенным frontend/.gitignore, дублируем для надёжности)
+frontend/node_modules/
+frontend/dist/
+
+# Editor/IDE
+.idea/
+.vscode/
+
+# Logs
+*.log

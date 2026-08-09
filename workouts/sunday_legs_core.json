@@ -1,0 +1,224 @@
+{
+  "id": "sunday_legs_core",
+  "name": "LEGS + CORE",
+  "day": "sunday",
+  "exercises": [
+    {
+      "id": "bulgarian_split_squats",
+      "name": "Bulgarian Split Squats",
+      "sets": 4,
+      "reps_target": "8–12",
+      "rest_sec": 150,
+      "notes": "Back foot elevated. Control your balance.",
+      "per_side": true,
+      "technique": {
+        "text": "Back foot on a chair. Lower yourself straight down, front knee over your foot.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Split Squats",
+          "description": "Regular lunges"
+        },
+        {
+          "level": 2,
+          "name": "Bulgarian Split Squats",
+          "description": "Foot elevated"
+        },
+        {
+          "level": 3,
+          "name": "Weighted Bulgarian",
+          "description": "Weighted"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 3,
+      "difficulty_threshold": 12
+    },
+    {
+      "id": "pistol_squat",
+      "name": "Pistol Squat (Progressions)",
+      "sets": 3,
+      "reps_target": "5–8",
+      "rest_sec": 180,
+      "notes": "The hardest leg exercise. Work on your balance.",
+      "per_side": true,
+      "technique": {
+        "text": "One leg straight out front, squat down on the other. Keep your back straight and the knee from caving inward.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Assisted Squat",
+          "description": "Holding a doorframe for support"
+        },
+        {
+          "level": 2,
+          "name": "Box Pistol",
+          "description": "Sitting down on a chair"
+        },
+        {
+          "level": 3,
+          "name": "Pistol Squat",
+          "description": "Full pistol squat"
+        },
+        {
+          "level": 4,
+          "name": "Weighted Pistol",
+          "description": "Weighted"
+        },
+        {
+          "level": 5,
+          "name": "Shrimp Squat",
+          "description": "Rear leg bent"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 5,
+      "difficulty_threshold": 8
+    },
+    {
+      "id": "single_leg_elevated_bridges",
+      "name": "Single-Leg Elevated Glute Bridge",
+      "sets": 3,
+      "reps_target": "10–15",
+      "rest_sec": 120,
+      "notes": "Focus on the hamstrings. Press the heel into the elevation.",
+      "per_side": true,
+      "technique": {
+        "text": "Lie on the floor, one heel on a chair (90° knee angle), the other leg straight in the air. Drive your hips as high as possible, squeezing the hamstring at the top. Lower slowly.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Two-leg Glute Bridge",
+          "description": "Both feet on the floor"
+        },
+        {
+          "level": 2,
+          "name": "Two-leg Elevated Bridge",
+          "description": "Both feet elevated"
+        },
+        {
+          "level": 3,
+          "name": "Single-leg Elevated Bridge",
+          "description": "One foot elevated"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 3,
+      "difficulty_threshold": 15
+    },
+    {
+      "id": "calf_raises",
+      "name": "Calf Raises",
+      "sets": 4,
+      "reps_target": "15–20",
+      "rest_sec": 60,
+      "notes": "Slow lowering — 3 seconds.",
+      "per_side": true,
+      "technique": {
+        "text": "Stand on the edge of a step. Full range of motion, slow lowering.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Two-leg Calf Raises",
+          "description": "Both legs"
+        },
+        {
+          "level": 2,
+          "name": "Single-leg Calf Raises",
+          "description": "One leg"
+        },
+        {
+          "level": 3,
+          "name": "Weighted Calf Raises",
+          "description": "Weighted"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 3,
+      "difficulty_threshold": 20
+    },
+    {
+      "id": "hollow_body_hold",
+      "name": "Hollow Body Hold",
+      "sets": 4,
+      "reps_target": "30–60 sec",
+      "rest_sec": 60,
+      "notes": "Lower back pressed to the floor. Keep breathing.",
+      "is_timed": true,
+      "technique": {
+        "text": "Keep your lower back on the floor at all times. Legs and shoulders lift off. Breathe through your nose.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Hollow Body (knees bent)",
+          "description": "Knees bent"
+        },
+        {
+          "level": 2,
+          "name": "Hollow Body Hold",
+          "description": "Straight legs"
+        },
+        {
+          "level": 3,
+          "name": "Hollow Body Rock",
+          "description": "Rocking"
+        },
+        {
+          "level": 4,
+          "name": "Hollow Body + Arms",
+          "description": "Arms overhead"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 4,
+      "difficulty_threshold": 60
+    },
+    {
+      "id": "hanging_leg_raises",
+      "name": "Hanging Leg Raises",
+      "sets": 3,
+      "reps_target": "15",
+      "rest_sec": 90,
+      "notes": "No swinging. Core control.",
+      "technique": {
+        "text": "Hang, raise straight legs to horizontal. Lower slowly. No swinging.",
+        "image": ""
+      },
+      "progression": [
+        {
+          "level": 1,
+          "name": "Hanging Knee Raises",
+          "description": "Bend the knees"
+        },
+        {
+          "level": 2,
+          "name": "Hanging Leg Raises",
+          "description": "Straight legs to horizontal"
+        },
+        {
+          "level": 3,
+          "name": "Toes to Bar",
+          "description": "Toes to the bar"
+        },
+        {
+          "level": 4,
+          "name": "L-sit",
+          "description": "Holding an L-sit"
+        }
+      ],
+      "difficulty_level": 1,
+      "difficulty_max": 4,
+      "difficulty_threshold": 15
+    }
+  ]
+}

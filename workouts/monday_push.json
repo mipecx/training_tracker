@@ -1,0 +1,145 @@
+{
+  "id": "monday_push",
+  "name": "PUSH",
+  "day": "monday",
+  "exercises": [
+    {
+      "id": "pike_pushups",
+      "name": "Pike Push-ups",
+      "sets": 4,
+      "reps_target": "6–12",
+      "rest_sec": 240,
+      "notes": "Foundation for shoulders. The closer your feet are to your hands, the harder.",
+      "difficulty_level": 2,
+      "difficulty_max": 4,
+      "difficulty_threshold": 12,
+      "progression": [
+        {
+          "level": 1,
+          "name": "Wall Push-ups",
+          "description": "Push-ups against a wall"
+        },
+        {
+          "level": 2,
+          "name": "Pike Push-ups",
+          "description": "Inverted V, head down"
+        },
+        {
+          "level": 3,
+          "name": "Decline Pike Push-ups",
+          "description": "Feet elevated"
+        },
+        {
+          "level": 4,
+          "name": "Pike Handstand Push-ups",
+          "description": "Almost a handstand"
+        }
+      ],
+      "technique": {
+        "text": "Place your feet as close to your hands as possible — your body forms an inverted V. Lower your head straight down between your hands, elbows slightly out.",
+        "image": ""
+      }
+    },
+    {
+      "id": "dips",
+      "name": "Bench Dips",
+      "sets": 4,
+      "reps_target": "8–12",
+      "rest_sec": 180,
+      "notes": "The \"king\" of exercises for the lower chest and triceps.",
+      "difficulty_level": 1,
+      "difficulty_max": 3,
+      "difficulty_threshold": 12,
+      "progression": [
+        {
+          "level": 1,
+          "name": "Bench Dips",
+          "description": "Push-ups supported on a bench"
+        },
+        {
+          "level": 2,
+          "name": "Dips",
+          "description": "On parallel bars / chairs"
+        },
+        {
+          "level": 3,
+          "name": "Weighted Dips",
+          "description": "Weighted"
+        }
+      ],
+      "technique": {
+        "text": "Lean forward to work the chest more. Stay vertical to target the triceps more. Don't flare your elbows too wide.",
+        "image": ""
+      }
+    },
+    {
+      "id": "decline_pushups",
+      "name": "Decline Push-ups",
+      "sets": 3,
+      "reps_target": "10–12",
+      "rest_sec": 120,
+      "notes": "Feet elevated to emphasize the upper chest.",
+      "difficulty_level": 2,
+      "difficulty_max": 4,
+      "difficulty_threshold": 12,
+      "progression": [
+        {
+          "level": 1,
+          "name": "Push-ups",
+          "description": "Regular push-ups"
+        },
+        {
+          "level": 2,
+          "name": "Decline Push-ups",
+          "description": "Feet elevated"
+        },
+        {
+          "level": 3,
+          "name": "Archer Push-ups",
+          "description": "Asymmetric, one arm wide"
+        },
+        {
+          "level": 4,
+          "name": "One-arm Push-up Progression",
+          "description": "Preparation for one-arm push-ups"
+        }
+      ],
+      "technique": {
+        "text": "Feet on a chair or bed. The higher your feet, the more load on the upper chest and front delts. Keep your body straight.",
+        "image": ""
+      }
+    },
+    {
+      "id": "diamond_pushups",
+      "name": "Diamond Push-ups",
+      "sets": 3,
+      "reps_target": "max",
+      "rest_sec": 120,
+      "notes": "Elbows tucked to your body. Triceps isolation.",
+      "difficulty_level": 2,
+      "difficulty_max": 3,
+      "difficulty_threshold": 12,
+      "progression": [
+        {
+          "level": 1,
+          "name": "Close-grip Push-ups",
+          "description": "Hands close together, but not a diamond"
+        },
+        {
+          "level": 2,
+          "name": "Diamond Push-ups",
+          "description": "Fingers form a diamond"
+        },
+        {
+          "level": 3,
+          "name": "Diamond Push-ups + Pause",
+          "description": "With a 2s pause at the bottom"
+        }
+      ],
+      "technique": {
+        "text": "Hands under your chest, thumbs and index fingers forming a diamond. Elbows move straight back along your body. Pause for 1 second at the bottom.",
+        "image": ""
+      }
+    }
+  ]
+}
