@@ -9,7 +9,23 @@
 
 	const now = new Date();
 	const hdr = $derived(`${DAYS[now.getDay()]}, ${now.getDate()} ${MONTHS[now.getMonth()]}`);
-	const servedWithPlan = window.location.pathname.startsWith('/gym');
+
+	const params = new URLSearchParams(window.location.search);
+	const planParam = params.get('plan') || '';
+	if (/^https?:\/\//i.test(planParam)) {
+		try {
+			localStorage.setItem('plan_app_url', planParam);
+		} catch {
+			/* ignore */
+		}
+	}
+	let planUrl = '';
+	try {
+		planUrl = localStorage.getItem('plan_app_url') || '';
+	} catch {
+		/* ignore */
+	}
+	const servedWithPlan = /^https?:\/\//i.test(planUrl) && window.location.pathname.startsWith('/gym');
 
 	function navTo(section: string) {
 		ui.screen = section as typeof ui.screen;
@@ -21,7 +37,7 @@
 		<div class="logo">GYMTRACKER</div>
 		<div class="header-right">
 			{#if servedWithPlan}
-				<a class="back-plan" href="/">← План</a>
+				<a class="back-plan" href={planUrl}>← План</a>
 			{/if}
 			<div class="day-badge" id="hdr-date">{hdr}</div>
 		</div>
