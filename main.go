@@ -5,7 +5,10 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
+	"sort"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/mipecx/training_tracker/db"
@@ -136,6 +139,7 @@ func handleSaveWorkout(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	workouts[day] = wk
+	maybeWritePlanSnapshot()
 	log.Printf("saved: %s (%d exercises)", wk.Name, len(wk.Exercises))
 	writeJSON(w, http.StatusOK, wk)
 }
@@ -175,6 +179,7 @@ func handleFinishSession(w http.ResponseWriter, r *http.Request) {
 		errJSON(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+	maybeWritePlanSnapshot()
 	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 }
 
@@ -324,6 +329,7 @@ func handleSaveMetric(w http.ResponseWriter, r *http.Request) {
 		errJSON(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+	maybeWritePlanSnapshot()
 	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 }
 
@@ -358,9 +364,45 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	mux.Handle("/", http.FileServer(http.Dir("frontend/dist")))
+	planAppDir := os.Getenv("PLAN_APP_DIR")
+	if planAppDir == "" {
+		planAppDir = "../plan-app"
+	}
+
+	planAvailable := false
+	if info, err := os.Stat(planAppDir); err == nil && info.IsDir() {
+		planAvailable = true
+	}
+
+	if planAvailable {
+		mux.Handle("/", http.FileServer(http.Dir(planAppDir)))
+		redirectRoot := func(w http.ResponseWriter, r *http.Request) {
+			target := "/"
+			if r.URL.RawQuery != "" {
+				target += "?" + r.URL.RawQuery
+			}
+			http.Redirect(w, r, target, http.StatusFound)
+		}
+		mux.HandleFunc("/plan", redirectRoot)
+		mux.HandleFunc("/plan/", redirectRoot)
+		log.Printf("plan-app → / (%s)", planAppDir)
+	} else {
+		mux.Handle("/", http.FileServer(http.Dir("frontend/dist")))
+		log.Printf("plan-app: %s not found, serving training_tracker at /", planAppDir)
+	}
+
+	mux.Handle("/gym/", http.StripPrefix("/gym/", http.FileServer(http.Dir("frontend/dist"))))
+	mux.HandleFunc("/gym", func(w http.ResponseWriter, r *http.Request) {
+		target := "/gym/"
+		if r.URL.RawQuery != "" {
+			target += "?" + r.URL.RawQuery
+		}
+		http.Redirect(w, r, target, http.StatusFound)
+	})
+	log.Printf("training_tracker → /gym/")
 
 	mux.HandleFunc("GET /api/today", handleToday)
+	mux.HandleFunc("/api/plan/training", handlePlanTraining)
 	mux.HandleFunc("GET /api/workout/{day}", handleWorkoutByDay)
 	mux.HandleFunc("PUT /api/workout/{day}", handleSaveWorkout)
 
@@ -385,7 +427,24 @@ func main() {
 		addr = v
 	}
 	log.Printf("gymtracker → http://localhost%s", addr)
-	log.Fatal(http.ListenAndServe(addr, mux))
+	log.Fatal(http.ListenAndServe(addr, withCORS(mux)))
+}
+
+// withCORS allows plan-app on GitHub Pages (possibly through an https tunnel)
+// to read and edit workouts on this server.
+func withCORS(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasPrefix(r.URL.Path, "/api/") {
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, OPTIONS")
+			w.Header().Set("Access-Control-Allow-Headers", "content-type")
+			if r.Method == http.MethodOptions {
+				w.WriteHeader(http.StatusNoContent)
+				return
+			}
+		}
+		next.ServeHTTP(w, r)
+	})
 }
 
 func handleSessionVolume(w http.ResponseWriter, r *http.Request) {
@@ -438,4 +497,200 @@ func handleSessionCompare(w http.ResponseWriter, r *http.Request) {
 		"current":  map[string]any{"session": session, "volume": currVol},
 		"previous": map[string]any{"session": prev, "volume": prevVol},
 	})
+}
+
+type planSnapshot struct {
+	Version    int               `json:"version"`
+	Source     string            `json:"source"`
+	ExportedAt string            `json:"exportedAt"`
+	Programs   []map[string]any  `json:"programs"`
+	Sessions   []map[string]any  `json:"sessions"`
+	Metrics    []db.WeeklyMetric `json:"metrics"`
+}
+
+func handlePlanTraining(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "content-type")
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
+	if r.Method != http.MethodGet {
+		errJSON(w, http.StatusMethodNotAllowed, "GET only")
+		return
+	}
+	snap, err := buildPlanSnapshot()
+	if err != nil {
+		errJSON(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	writeJSON(w, http.StatusOK, snap)
+}
+
+func buildPlanSnapshot() (*planSnapshot, error) {
+	sessions, err := database.ListSessions(1000)
+	if err != nil {
+		return nil, err
+	}
+	sort.Slice(sessions, func(i, j int) bool {
+		if sessions[i].Date == sessions[j].Date {
+			return sessions[i].ID < sessions[j].ID
+		}
+		return sessions[i].Date < sessions[j].Date
+	})
+
+	sessionRows := make([]map[string]any, 0, len(sessions))
+	for _, s := range sessions {
+		sets, err := database.GetSessionSets(s.ID)
+		if err != nil {
+			return nil, err
+		}
+
+		type setKey struct {
+			exercise string
+			num      int
+			side     string
+		}
+		dedup := map[setKey]db.SetEntry{}
+		for _, set := range sets {
+			side := ""
+			if set.Side != nil {
+				side = *set.Side
+			}
+			dedup[setKey{set.ExerciseID, set.SetNum, side}] = set
+		}
+
+		ordered := make([]db.SetEntry, 0, len(dedup))
+		for _, set := range dedup {
+			ordered = append(ordered, set)
+		}
+		sort.Slice(ordered, func(i, j int) bool {
+			a, b := ordered[i], ordered[j]
+			if a.ExerciseID != b.ExerciseID {
+				return a.ExerciseID < b.ExerciseID
+			}
+			if a.SetNum != b.SetNum {
+				return a.SetNum < b.SetNum
+			}
+			as, bs := "", ""
+			if a.Side != nil {
+				as = *a.Side
+			}
+			if b.Side != nil {
+				bs = *b.Side
+			}
+			return as < bs
+		})
+
+		setRows := make([]map[string]any, 0, len(ordered))
+		for _, set := range ordered {
+			setRows = append(setRows, map[string]any{
+				"exerciseId":   set.ExerciseID,
+				"exerciseName": set.ExerciseName,
+				"setNum":       set.SetNum,
+				"side":         set.Side,
+				"reps":         set.Reps,
+				"sec":          set.DurationSec,
+			})
+		}
+
+		var finished any
+		if s.FinishedAt != nil {
+			finished = s.FinishedAt.Format(time.RFC3339)
+		}
+		started := ""
+		if !s.StartedAt.IsZero() {
+			started = s.StartedAt.Format(time.RFC3339)
+		}
+
+		sessionRows = append(sessionRows, map[string]any{
+			"id":          s.ID,
+			"workoutId":   s.WorkoutID,
+			"workoutName": s.WorkoutName,
+			"date":        s.Date,
+			"startedAt":   started,
+			"finishedAt":  finished,
+			"durationSec": s.DurationSec,
+			"sets":        setRows,
+		})
+	}
+
+	metrics, err := database.ListWeeklyMetrics(1000)
+	if err != nil {
+		return nil, err
+	}
+	if metrics == nil {
+		metrics = []db.WeeklyMetric{}
+	}
+
+	return &planSnapshot{
+		Version:    1,
+		Source:     "training_tracker",
+		ExportedAt: time.Now().Format(time.RFC3339),
+		Programs:   planPrograms(),
+		Sessions:   sessionRows,
+		Metrics:    metrics,
+	}, nil
+}
+
+func planPrograms() []map[string]any {
+	out := make([]map[string]any, 0, len(workouts))
+	for _, day := range []string{"monday", "wednesday", "friday", "sunday"} {
+		w, ok := workouts[day]
+		if !ok {
+			continue
+		}
+		exercises := make([]map[string]any, 0, len(w.Exercises))
+		for _, ex := range w.Exercises {
+			exercises = append(exercises, map[string]any{
+				"id":                   ex.ID,
+				"name":                 ex.Name,
+				"sets":                 ex.Sets,
+				"reps_target":          ex.RepsTarget,
+				"rest_sec":             ex.RestSec,
+				"per_side":             ex.PerSide,
+				"is_timed":             ex.IsTimed,
+				"difficulty_level":     ex.DifficultyLevel,
+				"difficulty_max":       ex.DifficultyMax,
+				"difficulty_threshold": ex.DifficultyThreshold,
+			})
+		}
+		out = append(out, map[string]any{
+			"id":        w.ID,
+			"name":      w.Name,
+			"day":       w.Day,
+			"exercises": exercises,
+		})
+	}
+	return out
+}
+
+func maybeWritePlanSnapshot() {
+	path := os.Getenv("PLAN_TRAINING_JSON")
+	if path == "" {
+		return
+	}
+	if err := writePlanSnapshot(path); err != nil {
+		log.Printf("plan snapshot: %v", err)
+		return
+	}
+	log.Printf("plan snapshot: %s", path)
+}
+
+func writePlanSnapshot(path string) error {
+	snap, err := buildPlanSnapshot()
+	if err != nil {
+		return err
+	}
+	data, err := json.MarshalIndent(snap, "", "  ")
+	if err != nil {
+		return err
+	}
+	if dir := filepath.Dir(path); dir != "." {
+		if err := os.MkdirAll(dir, 0755); err != nil {
+			return err
+		}
+	}
+	return os.WriteFile(path, data, 0644)
 }

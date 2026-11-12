@@ -94,16 +94,16 @@
 					{
 						label: 'Previous',
 						data: prevVol,
-						backgroundColor: '#2a2a2a',
-						borderColor: '#3a3a3a',
+						backgroundColor: '#262b36',
+						borderColor: '#323846',
 						borderWidth: 1,
 						borderRadius: 4,
 					},
 					{
 						label: 'Current',
 						data: currVol,
-						backgroundColor: currVol.map((v, i) => (v >= prevVol[i] ? '#c8ff00' : '#ff4444')),
-						borderColor: currVol.map((v, i) => (v >= prevVol[i] ? '#a0cc00' : '#cc2222')),
+						backgroundColor: currVol.map((v, i) => (v >= prevVol[i] ? '#4ade80' : '#f87171')),
+						borderColor: currVol.map((v, i) => (v >= prevVol[i] ? '#3bbf66' : '#d95f5f')),
 						borderWidth: 1,
 						borderRadius: 4,
 					},
@@ -116,17 +116,17 @@
 					plugins: {
 						legend: { display: false },
 						tooltip: {
-							backgroundColor: '#1a1a1a',
-							titleColor: '#f0f0f0',
-							bodyColor: '#888',
-							borderColor: '#2a2a2a',
+							backgroundColor: '#171a21',
+							titleColor: '#e8ebf0',
+							bodyColor: '#8b93a3',
+							borderColor: '#262b36',
 							borderWidth: 1,
 							callbacks: { label: (c) => `${c.dataset.label}: ${c.parsed.x}` },
 						},
 					},
 				scales: {
-					x: { ticks: { color: '#555', font: { family: 'JetBrains Mono', size: 10 } }, grid: { color: '#1a1a1a' }, beginAtZero: true },
-					y: { ticks: { color: '#888', font: { family: 'JetBrains Mono', size: 10 }, autoSkip: false }, grid: { color: '#1a1a1a' } },
+					x: { ticks: { color: '#5f6775', font: { family: 'system-ui', size: 11 } }, grid: { color: '#1b1f27' }, beginAtZero: true },
+					y: { ticks: { color: '#8b93a3', font: { family: 'system-ui', size: 11 }, autoSkip: false }, grid: { color: '#1b1f27' } },
 				},
 			},
 		});
@@ -173,8 +173,8 @@
 			<div id="stab-panel-chart">
 				<div id="session-chart-wrap" style="height:{Math.max(200, Object.keys(byEx).length * 44 + 60)}px">
 					<div class="chart-legend">
-						<span class="leg-item"><span class="leg-dot" style="background:#333"></span>Previous</span>
-						<span class="leg-item"><span class="leg-dot" style="background:#c8ff00"></span>Current</span>
+						<span class="leg-item"><span class="leg-dot" style="background:#262b36;border:1px solid #323846"></span>Previous</span>
+						<span class="leg-item"><span class="leg-dot" style="background:#4ade80"></span>Current</span>
 					</div>
 					<div style="position:relative;width:100%;height:100%;margin-top:12px">
 						<canvas id="session-chart" aria-label="Exercise volume comparison"></canvas>

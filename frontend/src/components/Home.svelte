@@ -100,7 +100,19 @@
 	}
 
 	$effect(() => {
-		load();
+		const params = new URLSearchParams(window.location.search);
+		const day = params.get('day') || undefined;
+		const shouldStart = params.get('start') === '1';
+
+		if (shouldStart) {
+			load(day).then(() => {
+				if (!workout) return;
+				window.history.replaceState({}, '', window.location.pathname);
+				startWorkout();
+			});
+		} else {
+			load(day);
+		}
 	});
 
 	$effect(() => {

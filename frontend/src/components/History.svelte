@@ -2,6 +2,7 @@
 	import { api } from '../lib/api';
 	import type { Session } from '../lib/types';
 	import { ui, DAYS, MONTHS } from '../lib/store.svelte';
+	import AiReview from './AiReview.svelte';
 
 	let loading = $state(true);
 	let sessions = $state<Session[]>([]);
@@ -18,9 +19,9 @@
 	});
 
 	const typeColors: Record<string, string> = {
-		monday: '#c8ff00',
-		wednesday: '#4ade80',
-		friday: '#60a5fa',
+		monday: '#4ade80',
+		wednesday: '#60a5fa',
+		friday: '#fbbf24',
 		sunday: '#f472b6',
 	};
 
@@ -44,6 +45,8 @@
 </script>
 
 <div id="history-body">
+	<AiReview />
+
 	{#if loading}
 		<div class="loading-txt">Loading...</div>
 	{:else if sessions.filter((s) => s.FinishedAt).length === 0}

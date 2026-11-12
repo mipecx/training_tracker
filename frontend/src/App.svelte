@@ -9,6 +9,7 @@
 
 	const now = new Date();
 	const hdr = $derived(`${DAYS[now.getDay()]}, ${now.getDate()} ${MONTHS[now.getMonth()]}`);
+	const servedWithPlan = window.location.pathname.startsWith('/gym');
 
 	function navTo(section: string) {
 		ui.screen = section as typeof ui.screen;
@@ -18,7 +19,12 @@
 <div id="app">
 	<div class="header">
 		<div class="logo">GYMTRACKER</div>
-		<div class="day-badge" id="hdr-date">{hdr}</div>
+		<div class="header-right">
+			{#if servedWithPlan}
+				<a class="back-plan" href="/">← План</a>
+			{/if}
+			<div class="day-badge" id="hdr-date">{hdr}</div>
+		</div>
 	</div>
 
 	{#if ui.screen === 'home'}
